@@ -20,7 +20,7 @@ public class CarScript : MonoBehaviour
     public Transform endPointRight;
 
 
-    public bool despawns = true;
+    public bool despawns = false;
 
     SpriteRenderer sr; 
  
@@ -51,23 +51,24 @@ public class CarScript : MonoBehaviour
         //simulates a coin flip to decide between which lane to spawn the car
 
 
-        if (t == 1)
+        if (t > 4 || t == 4)
         {
-            laneSpawn = Random.Range(1, 3);
-            laneSpawn = (int)laneSpawn; //type casts lane spawn to int to be used in if statement
-
             t = 0;
+
+            laneSpawn = Random.Range(1, 3);
+             
         }
 
+        //type casts lane spawn to int to be used in if statement
+        laneSpawn = (int)laneSpawn;
 
         //if left car is at the end point (up), respawn at bottom with a random speed (2-4)
         //if right car is at the end point (down), respawn at up with a random speed (2-4)
 
         //spawns car either at start point right lane or start point left lane (random)
-        if (SpawnedCar.transform.position.y == endPointLeft.transform.position.y || despawns == true)
+        if (SpawnedCar.transform.position.y == endPointLeft.transform.position.y || despawns == false)
         {
-            
-
+      
             Debug.Log("passed");
             Debug.Log("laneSpawn = " + laneSpawn);
 
@@ -76,16 +77,18 @@ public class CarScript : MonoBehaviour
             if (laneSpawn == 1)
             {
                 //spawn car in start point left lane
-                changeColour();
+                //changeColour();
                 SpawnedCar = Instantiate(carPrefab, startPointLeft.transform.position, Quaternion.identity);
                 despawns = false;
+                laneSpawn = 0;
             }
             else if (laneSpawn == 2)
             {
                 //spawn car in start point right lane
-                changeColour();
+                //changeColour();
                 SpawnedCar = Instantiate(carPrefab, startPointRight.transform.position, Quaternion.Euler(0,0,180));
                 despawns = false;
+                laneSpawn = 0;
             }
 
         }
@@ -103,12 +106,12 @@ public class CarScript : MonoBehaviour
     }
 
 
-    void changeColour()
-    {
-        //changes the colour of the spawned car to a random colour
-       sr.color = Random.ColorHSV();
+    //void changeColour()
+    //{
+    //    //changes the colour of the spawned car to a random colour
+    //   sr.color = Random.ColorHSV();
         
-    }
+    //}
 
     //white car source: https://www.istockphoto.com/vector/white-car-from-top-view-isolated-on-white-background-delivery-automobile-sedan-icon-gm1768708309-545597961
 }
