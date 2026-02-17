@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 
 public class CarScript : MonoBehaviour
 {
-    public float t;
+    public float t = 0f;
+    float laneSpawn;
 
     public GameObject SpawnedCar;
     public GameObject carPrefab; 
@@ -19,7 +20,7 @@ public class CarScript : MonoBehaviour
     public Transform endPointRight;
 
 
-    public bool despawns = false;
+    public bool despawns = true;
 
     SpriteRenderer sr; 
  
@@ -35,7 +36,7 @@ public class CarScript : MonoBehaviour
     void Update()
     {
         //change the colour of the 3 cars every time the toy resets or the colour of the car that despawns and respawns
-        t = Time.deltaTime;
+        t += Time.deltaTime;
 
         //spawnCar = Instantiate(SpawnedCar, transform.position, transform.rotation);
 
@@ -43,21 +44,34 @@ public class CarScript : MonoBehaviour
         //{
         //   SpawnedCar = Instantiate(carPrefab, startPointLeft.transform.position, Quaternion.identity);
         //}
-           
+
 
         //Instantiate(SpawnedCar, leftLane.position, Quaternion.identity); //instantiates car prefab
 
-        
+        //simulates a coin flip to decide between which lane to spawn the car
+
+
+        if (t == 1)
+        {
+            laneSpawn = Random.Range(1, 3);
+            laneSpawn = (int)laneSpawn; //type casts lane spawn to int to be used in if statement
+
+            t = 0;
+        }
+
 
         //if left car is at the end point (up), respawn at bottom with a random speed (2-4)
         //if right car is at the end point (down), respawn at up with a random speed (2-4)
 
-        //spawns car at either at start point right lane or start point left lane (random)
-        if (SpawnedCar.transform.position.y == endPointLeft.transform.position.y)
+        //spawns car either at start point right lane or start point left lane (random)
+        if (SpawnedCar.transform.position.y == endPointLeft.transform.position.y || despawns == true)
         {
-            float laneSpawn = Random.Range(1, 2);
+            
 
-            laneSpawn = (int)laneSpawn; //type casts lane spawn to int to be used in if statement
+            Debug.Log("passed");
+            Debug.Log("laneSpawn = " + laneSpawn);
+
+            
 
             if (laneSpawn == 1)
             {
@@ -70,14 +84,14 @@ public class CarScript : MonoBehaviour
             {
                 //spawn car in start point right lane
                 changeColour();
-                SpawnedCar = Instantiate(carPrefab, startPointRight.transform.position, Quaternion.identity);
+                SpawnedCar = Instantiate(carPrefab, startPointRight.transform.position, Quaternion.Euler(0,0,180));
                 despawns = false;
             }
 
         }
 
         //despawns the car that reached the lanes' respective end points
-        //if (SpawnedCar.transform.position == endPointRight.transform.position)
+        //if (SpawnedCar.transform.position.y == endPointRight.transform.position.y)
         //{
         //    //destroy THIS car object (using list index)
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MoveCar : MonoBehaviour
 {
-    public float speed = 2f;
+    public float speed = 0.05f;
     public float t;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
