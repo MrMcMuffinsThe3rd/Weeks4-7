@@ -27,7 +27,8 @@ public class CarScript : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
- 
+        SpawnedCar = Instantiate(carPrefab, startPointLeft.transform.position, Quaternion.identity);
+
     }
 
     // Update is called once per frame
@@ -38,10 +39,10 @@ public class CarScript : MonoBehaviour
 
         //spawnCar = Instantiate(SpawnedCar, transform.position, transform.rotation);
 
-        if (Mouse.current.leftButton.wasPressedThisFrame == true)
-        {
-            SpawnedCar = Instantiate(SpawnedCar, startPointLeft.transform.position, Quaternion.identity);
-        }
+        //if (Mouse.current.leftButton.wasPressedThisFrame == true)
+        //{
+        //   SpawnedCar = Instantiate(carPrefab, startPointLeft.transform.position, Quaternion.identity);
+        //}
            
 
         //Instantiate(SpawnedCar, leftLane.position, Quaternion.identity); //instantiates car prefab
@@ -52,7 +53,7 @@ public class CarScript : MonoBehaviour
         //if right car is at the end point (down), respawn at up with a random speed (2-4)
 
         //spawns car at either at start point right lane or start point left lane (random)
-        if (gameObject.transform.position.y == endPointLeft.transform.position.y)
+        if (SpawnedCar.transform.position.y == endPointLeft.transform.position.y)
         {
             float laneSpawn = Random.Range(1, 2);
 
@@ -63,27 +64,26 @@ public class CarScript : MonoBehaviour
                 //spawn car in start point left lane
                 changeColour();
                 SpawnedCar = Instantiate(carPrefab, startPointLeft.transform.position, Quaternion.identity);
-                //SpawnedCar.transform.position = startPointLeft.transform.position;
                 despawns = false;
             }
             else if (laneSpawn == 2)
             {
                 //spawn car in start point right lane
                 changeColour();
-                SpawnedCar.transform.position = startPointRight.transform.position;
+                SpawnedCar = Instantiate(carPrefab, startPointRight.transform.position, Quaternion.identity);
                 despawns = false;
             }
 
         }
 
         //despawns the car that reached the lanes' respective end points
-        if (SpawnedCar.transform.position == endPointRight.transform.position)
-        {
-            //destroy THIS car object (using list index)
+        //if (SpawnedCar.transform.position == endPointRight.transform.position)
+        //{
+        //    //destroy THIS car object (using list index)
 
-            //then set despawns to true
-            despawns = true;
-        }
+        //    //then set despawns to true
+        //    despawns = true;
+        //}
 
 
     }
