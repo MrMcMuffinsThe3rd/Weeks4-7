@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CarScript : MonoBehaviour
@@ -5,9 +6,9 @@ public class CarScript : MonoBehaviour
     public float t;
     public float speed = 2f;
 
-   //public GameObject car;
+   public GameObject car;
 
-   public Transform start;
+    public Transform start;
     public Transform end;
 
     public Vector2 movePos;
@@ -25,18 +26,17 @@ public class CarScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Instantiate(car, start.position, Quaternion.identity);
+        //change the colour of the 3 cars every time the toy resets or the colour of the car that despawns and respawns
+        t = Time.deltaTime;
+
+        Instantiate(car, start.position, Quaternion.identity); //instantiates car prefab
 
         //basic directional movement (along the y vector to accomodate for the direction of each car (up/down))
         transform.position += transform.up * speed * t;
 
-        movePos = transform.position;
-        transform.position = movePos;
-        movePos.y = transform.position.y;
-
         //if left car is at the end point (up), respawn at bottom with a random speed (2-4)
         //if right car is at the end point (down), respawn at up with a random speed (2-4)
-        if (movePos.y == end.position.y)
+        if (t > 1)
         {
             //despawn/respawn up/down (depending on lane) with a random speed between 2-4
             despawns = true;
@@ -45,10 +45,6 @@ public class CarScript : MonoBehaviour
 
             despawns = false;
         }
-
-
-        //change the colour of the 3 cars every time the toy resets or the colour of the car that despawns and respawns
-        t = Time.deltaTime;
 
         if (despawns == true)
         {
@@ -70,4 +66,7 @@ public class CarScript : MonoBehaviour
     {
 
     }
+
+
+    //white car source: https://www.istockphoto.com/vector/white-car-from-top-view-isolated-on-white-background-delivery-automobile-sedan-icon-gm1768708309-545597961
 }
