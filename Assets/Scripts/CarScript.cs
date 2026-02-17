@@ -33,7 +33,7 @@ public class CarScript : MonoBehaviour
         
 
 
-        Instantiate(SpawnedCar, leftLane.position, Quaternion.identity); //instantiates car prefab
+        //Instantiate(SpawnedCar, leftLane.position, Quaternion.identity); //instantiates car prefab
 
         //basic directional movement (along the y vector to accomodate for the direction of each car (up/down))
         transform.position += transform.up * speed * t;

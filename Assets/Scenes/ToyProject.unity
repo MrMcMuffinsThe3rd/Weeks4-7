@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a31dd8be83a25ab4fa21fbb930057bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 1458752556}
 --- !u!1 &167554198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1299,13 +1300,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 167554199}
   m_HandleRect: {fileID: 1822247441}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -1.2
+  m_MaxValue: 1.7
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1.7
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 81477040}
+        m_TargetAssemblyTypeName: PlayerCarScript, Assembly-CSharp
+        m_MethodName: StopAllCoroutines
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!1 &1511066297
 GameObject:
   m_ObjectHideFlags: 0
