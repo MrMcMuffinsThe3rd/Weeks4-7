@@ -6,10 +6,10 @@ public class CarScript : MonoBehaviour
     public float t;
     public float speed = 2f;
 
-   public GameObject car;
+   public GameObject SpawnedCar; //white car prefab
 
-    public Transform start;
-    public Transform end;
+    public Transform leftLane;
+    public Transform rightLane;
 
     public Vector2 movePos;
 
@@ -21,6 +21,8 @@ public class CarScript : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        
+        leftLane = GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -28,8 +30,10 @@ public class CarScript : MonoBehaviour
     {
         //change the colour of the 3 cars every time the toy resets or the colour of the car that despawns and respawns
         t = Time.deltaTime;
+        
 
-        Instantiate(car, start.position, Quaternion.identity); //instantiates car prefab
+
+        Instantiate(SpawnedCar, leftLane.position, Quaternion.identity); //instantiates car prefab
 
         //basic directional movement (along the y vector to accomodate for the direction of each car (up/down))
         transform.position += transform.up * speed * t;
@@ -41,7 +45,7 @@ public class CarScript : MonoBehaviour
             //despawn/respawn up/down (depending on lane) with a random speed between 2-4
             despawns = true;
 
-            movePos.y = start.position.y;
+            movePos.y = leftLane.position.y;
 
             despawns = false;
         }
