@@ -20,7 +20,8 @@ public class PlayerCarScript : MonoBehaviour
     {
         //check if player car is in NPC car's bounds (hit it)
         //if it is: stop the game, show score at the time the game stopped and prompt the player to restart
-        
+        //stop all scripts from running (deactivate them)
+
     }
 
     public void move()
