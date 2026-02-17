@@ -39,6 +39,7 @@ public class PlayerCarScript : MonoBehaviour
         if (gotHit == true)
         {
             //stop the game, show restart button and restartScreen
+            //stop all scripts from running (deactivate them)
          
             gameObject.SetActive(true);
         }

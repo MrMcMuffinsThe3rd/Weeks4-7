@@ -220,6 +220,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1458752556}
+  restart: {fileID: 1248857951}
+  gotHit: 0
 --- !u!1 &167554198
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +633,7 @@ GameObject:
   - component: {fileID: 541360724}
   - component: {fileID: 541360725}
   m_Layer: 0
-  m_Name: start
+  m_Name: startSpawnLeftLane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -797,7 +799,7 @@ GameObject:
   - component: {fileID: 992497765}
   - component: {fileID: 992497766}
   m_Layer: 0
-  m_Name: end
+  m_Name: endRightLane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -883,13 +885,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1044907314}
   - component: {fileID: 1044907313}
+  - component: {fileID: 1044907315}
   m_Layer: 0
   m_Name: restartScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1044907313
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -960,6 +963,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1044907315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044907312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a31dd8be83a25ab4fa21fbb930057bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1458752556}
+  restart: {fileID: 1248857951}
+  gotHit: 0
 --- !u!1 &1140003749
 GameObject:
   m_ObjectHideFlags: 0
@@ -1228,7 +1246,7 @@ GameObject:
   - component: {fileID: 1404442544}
   - component: {fileID: 1404442545}
   m_Layer: 0
-  m_Name: end
+  m_Name: endLeftLane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1587,7 +1605,7 @@ GameObject:
   - component: {fileID: 1592677167}
   - component: {fileID: 1592677168}
   m_Layer: 0
-  m_Name: start
+  m_Name: startSpawnRightLane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2081,17 +2099,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4899959571064207032, guid: 463603428afb6db4d94df0f9f06b7309, type: 3}
-      propertyPath: leftLane
+      propertyPath: endPointLeft
       value: 
-      objectReference: {fileID: 1511066298}
+      objectReference: {fileID: 1404442544}
     - target: {fileID: 4899959571064207032, guid: 463603428afb6db4d94df0f9f06b7309, type: 3}
-      propertyPath: rightLane
+      propertyPath: endPointRight
       value: 
-      objectReference: {fileID: 438087733}
+      objectReference: {fileID: 992497765}
     - target: {fileID: 4899959571064207032, guid: 463603428afb6db4d94df0f9f06b7309, type: 3}
-      propertyPath: SpawnedCar
+      propertyPath: startPointLeft
       value: 
-      objectReference: {fileID: 8120416696465857850, guid: 463603428afb6db4d94df0f9f06b7309, type: 3}
+      objectReference: {fileID: 541360724}
+    - target: {fileID: 4899959571064207032, guid: 463603428afb6db4d94df0f9f06b7309, type: 3}
+      propertyPath: startPointRight
+      value: 
+      objectReference: {fileID: 1592677167}
     - target: {fileID: 8120416696465857850, guid: 463603428afb6db4d94df0f9f06b7309, type: 3}
       propertyPath: m_Name
       value: whiteCar(Default)

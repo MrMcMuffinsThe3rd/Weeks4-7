@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8585949646156752883}
   - component: {fileID: 162962899672018651}
   - component: {fileID: 4899959571064207032}
+  - component: {fileID: 3107277069621925355}
   m_Layer: 0
   m_Name: whiteCar(Default)
   m_TagString: Untagged
@@ -101,9 +102,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t: 0
-  speed: 2
-  car: {fileID: 0}
-  start: {fileID: 0}
-  end: {fileID: 0}
-  movePos: {x: 0, y: 0}
+  SpawnedCar: {fileID: 0}
+  carPrefab: {fileID: 8120416696465857850}
+  cars: []
+  startPointLeft: {fileID: 0}
+  startPointRight: {fileID: 0}
+  endPointLeft: {fileID: 0}
+  endPointRight: {fileID: 0}
   despawns: 0
+--- !u!114 &3107277069621925355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8120416696465857850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c511cc8f13a0f204f94f4208a570500d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  t: 0
