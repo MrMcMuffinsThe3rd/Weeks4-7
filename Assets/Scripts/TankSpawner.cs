@@ -36,7 +36,7 @@ public class TankSpawner : MonoBehaviour
             //setting a spawn point for prefabs
             //instantiate a prefab, a vector2 or vector3, a Quaternion: make it appear at this position and rotation
             //Instantiate(tankPrefab, transform.position, transform.rotation);
-            //transform.postion and transform.rotation is assigned from the gameobject this current script (TankSpawner) is palced on
+            //transform.postion and transform.rotation is assigned from the gameobject this current script (TankSpawner) is placed on
 
             SpawnedTank = Instantiate(tankPrefab, transform.position, transform.rotation);
             
