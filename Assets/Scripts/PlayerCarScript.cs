@@ -3,12 +3,15 @@ using UnityEngine.UI;
 
 public class PlayerCarScript : MonoBehaviour
 {
+    float t;
+
     public Slider slider;
-    public Button restart;
 
     CarScript csStop;
     MoveCar mcStop;
     PlayerCarScript pcsStop;
+
+   public CarScript NPCcar;
 
     public bool gotHit = false; //checks if player car hit a car
 
@@ -18,12 +21,19 @@ public class PlayerCarScript : MonoBehaviour
         csStop = GetComponent<CarScript>();
         mcStop = GetComponent<MoveCar>();
         pcsStop = GetComponent<PlayerCarScript>();
+
+        NPCcar = GetComponent<CarScript>();
+
+       
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-      crashed();
+        t = Time.deltaTime;
+
+        crashed();
     }
 
     public void move()
@@ -46,28 +56,29 @@ public class PlayerCarScript : MonoBehaviour
         if (gotHit == true)
         {
 
-
-
             //deactivates all game objects with these scripts attached (stops the game)
             csStop.gameObject.SetActive(false);
             mcStop.gameObject.SetActive(false);
             pcsStop.gameObject.SetActive(false);
 
             //shows end score, restart button and end game white screen, deactivates slider
-            restart.gameObject.SetActive(true);
             slider.gameObject.SetActive(false);
             gameObject.SetActive(true); //shows end white screen
 
-        }
-        else
-        {
-            csStop.gameObject.SetActive(true);
-            mcStop.gameObject.SetActive(true);
-            pcsStop.gameObject.SetActive(true);
+            //stop and display final score
+            ScoreScript sc = GetComponent<ScoreScript>();
+            sc.score = t;
 
-            restart.gameObject.SetActive(false);
-            slider.gameObject.SetActive(true);
-            gameObject.SetActive(true);
+        }
+        else if (gotHit == false)
+        {
+            //csStop.gameObject.SetActive(true);
+            //mcStop.gameObject.SetActive(true);
+            //pcsStop.gameObject.SetActive(true);
+
+            //restart.gameObject.SetActive(false);
+            //slider.gameObject.SetActive(true);
+            //gameObject.SetActive(true);
         }
     }
 
@@ -75,5 +86,6 @@ public class PlayerCarScript : MonoBehaviour
     {
         // prompts the player to restart the game if they want (using restart button "OnClick function")
         gotHit = false;
+        gameObject.SetActive(true);
     }
 }

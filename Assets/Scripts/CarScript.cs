@@ -51,11 +51,31 @@ public class CarScript : MonoBehaviour
         despawns = false;
 
         spawnCar();
-        despawnCar();
 
+        //if (cars.Count > 0)
+        //{
+        //    for (int i = cars.Count - 1; i >= 0; i--)
+        //    {
+        //        //checks if playerCar crashed into NPCcar
+        //        PlayerCarScript player = GetComponent<PlayerCarScript>();
+
+        //        player.gameObject.transform.position = transform.position;
+
+        //        float distanceBetweenNPCcarAndPlayerCar = Vector2.Distance(cars[i].transform.position, player.gameObject.transform.position);
+
+        //        if (distanceBetweenNPCcarAndPlayerCar < 0.05f)
+        //        {
+        //            PlayerCarScript ps = GetComponent<PlayerCarScript>();
+        //            ps.gotHit = true;
+        //        }
+        //    }
+        //}
+
+        despawnCar();
+       
     }
 
-    void spawnCar()
+        void spawnCar()
     {
         //spawns car either at start point right lane or start point left lane (random)
         if (despawns == false)
@@ -123,7 +143,6 @@ public class CarScript : MonoBehaviour
                 Destroy(car);
             }
         }
-\
     }
 
     //white car source: https://www.istockphoto.com/vector/white-car-from-top-view-isolated-on-white-background-delivery-automobile-sedan-icon-gm1768708309-545597961
