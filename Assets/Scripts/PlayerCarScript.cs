@@ -6,22 +6,24 @@ public class PlayerCarScript : MonoBehaviour
     public Slider slider;
     public Button restart;
 
-    public bool gotHit = true; //checks if a car got hit by player car 
+    CarScript csStop;
+    MoveCar mcStop;
+    PlayerCarScript pcsStop;
 
+    public bool gotHit = false; //checks if player car hit a car
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GetComponent<CarScript>();
+        csStop = GetComponent<CarScript>();
+        mcStop = GetComponent<MoveCar>();
+        pcsStop = GetComponent<PlayerCarScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //check if player car is in NPC car's bounds (hit it)
-        //if it is: stop the game, show score at the time the game stopped and prompt the player to restart
-        //stop all scripts from running (deactivate them)
-
+      crashed();
     }
 
     public void move()
@@ -37,17 +39,41 @@ public class PlayerCarScript : MonoBehaviour
 
     public void crashed()
     {
+        //check if player car is in NPC car's bounds (hit it)
+        //if it is: stop the game, show score at the time the game stopped and prompt the player to restart
+        //stop all scripts from running (deactivate them)
+
         if (gotHit == true)
         {
-            //stop the game, show restart button and restartScreen
-            //stop all scripts from running (deactivate them)
-         
+
+
+
+            //deactivates all game objects with these scripts attached (stops the game)
+            csStop.gameObject.SetActive(false);
+            mcStop.gameObject.SetActive(false);
+            pcsStop.gameObject.SetActive(false);
+
+            //shows end score, restart button and end game white screen, deactivates slider
+            restart.gameObject.SetActive(true);
+            slider.gameObject.SetActive(false);
+            gameObject.SetActive(true); //shows end white screen
+
+        }
+        else
+        {
+            csStop.gameObject.SetActive(true);
+            mcStop.gameObject.SetActive(true);
+            pcsStop.gameObject.SetActive(true);
+
+            restart.gameObject.SetActive(false);
+            slider.gameObject.SetActive(true);
             gameObject.SetActive(true);
         }
-        else if (gotHit == false || restart == false)
-        {
-            gameObject.SetActive(false);
-        }
+    }
 
+    public void restartGame()
+    {
+        // prompts the player to restart the game if they want (using restart button "OnClick function")
+        gotHit = false;
     }
 }

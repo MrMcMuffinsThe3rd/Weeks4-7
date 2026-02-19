@@ -11,7 +11,7 @@ public class CarScript : MonoBehaviour
     public GameObject SpawnedCar;
     public GameObject carPrefab; 
 
-    public List<GameObject> cars; //list of 3 cars (bec only 3 cars can spawn on the screen at the same time)
+    public List<GameObject> cars; //list to keep track of spawned cars
 
     public Transform startPointLeft;
     public Transform startPointRight;
@@ -123,17 +123,7 @@ public class CarScript : MonoBehaviour
                 Destroy(car);
             }
         }
-
-
-
-            ////despawns the car that reached the lanes' respective end points
-            //if (SpawnedCar.transform.position.y == endPointRight.transform.position.y || SpawnedCar.transform.position.y == endPointLeft.transform.position.y)
-            //{
-            //    //destroy THIS car object (using list index)
-            //    Destroy(SpawnedCar);
-            //    //then set despawns to true
-            //    despawns = true;
-            //}
+\
     }
 
     //white car source: https://www.istockphoto.com/vector/white-car-from-top-view-isolated-on-white-background-delivery-automobile-sedan-icon-gm1768708309-545597961
