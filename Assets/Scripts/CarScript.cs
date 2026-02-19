@@ -26,7 +26,7 @@ public class CarScript : MonoBehaviour
     void Start()
     {
         SpawnedCar = Instantiate(carPrefab, startPointLeft.transform.position, Quaternion.identity);
-
+        cars.Add(SpawnedCar);
     }
 
     // Update is called once per frame
@@ -104,9 +104,12 @@ public class CarScript : MonoBehaviour
     {
         for (int i = cars.Count - 1; i >= 0 ; i--)
         {
-            float distance = Vector2.Distance(cars[i].transform.position, endPointLeft.position);
+            float distanceLeft = Vector2.Distance(cars[i].transform.position, endPointLeft.position);
+            float distanceRight = Vector2.Distance(cars[i].transform.position, endPointRight.position);
 
-            if (distance < 0.5f)
+            //checks if the cars reached the end points of the lanes, despawns them if they did
+            //removes any spawned cars out of bounds that weren't otherwise despawned by using distance
+            if (distanceLeft < 0.05f || distanceRight < 0.05f || SpawnedCar.transform.position.y > endPointLeft.position.y || SpawnedCar.transform.position.y < endPointRight.position.y)
             {
                 Debug.Log("despawned car succesfully " + i);
 

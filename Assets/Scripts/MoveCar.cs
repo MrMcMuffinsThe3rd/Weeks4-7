@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MoveCar : MonoBehaviour
 {
-    public float speed = 0.05f;
+    public float speed = 3f;
     public float t;
 
     SpriteRenderer sr;
@@ -19,16 +19,6 @@ public class MoveCar : MonoBehaviour
     {
 
          t = Time.deltaTime;
-
-        //if (t > 0.02 || t == 0.02)
-        //{
-        //    t = 0;
-
-        //    //makes the speed change in this range every 4 seconds
-        //    speed = Random.Range(0.05f, 0.08f);
-        //}
-
-        Debug.Log("spawned car speed = " + speed);
 
         //basic directional movement (along the y vector to accomodate for the direction of each car (up/down))
         transform.position += transform.up * speed * t;
