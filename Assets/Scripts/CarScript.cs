@@ -52,6 +52,7 @@ public class CarScript : MonoBehaviour
 
         spawnCar();
 
+        ///ATTEMPT AT WITHIN SCOPE "OBJECT COLLISIONS". IT DID NOT WORK; NULL EXCEPTION ERROR
         //if (cars.Count > 0)
         //{
         //    for (int i = cars.Count - 1; i >= 0; i--)
