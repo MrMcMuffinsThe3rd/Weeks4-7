@@ -19,7 +19,6 @@ public class CarScript : MonoBehaviour
     public Transform endPointLeft;
     public Transform endPointRight;
 
-
     public bool despawns = false;
 
  
@@ -33,63 +32,105 @@ public class CarScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //change the colour of the 3 cars every time the toy resets or the colour of the car that despawns and respawns
         t += Time.deltaTime;
 
+
         //simulates a coin flip to decide between which lane to spawn the car
-
-
-        if (t > 4 || t == 4)
+        //returns a number for laneSpawn
+        if (t > 2 || t == 2)
         {
             t = 0;
 
+            //picks between 1 or 2 to decide later which lane to spawn the car in
             laneSpawn = Random.Range(1, 3);
-             
+
         }
 
         //type casts lane spawn to int to be used in if statement
         laneSpawn = (int)laneSpawn;
         despawns = false;
 
-        //if left car is at the end point (up), respawn at bottom with a random speed (2-4)
-        //if right car is at the end point (down), respawn at up with a random speed (2-4)
+        spawnCar();
+        despawnCar();
 
+    }
+
+    void spawnCar()
+    {
         //spawns car either at start point right lane or start point left lane (random)
         if (despawns == false)
         {
-      
-            Debug.Log("passed");
-            Debug.Log("laneSpawn = " + laneSpawn);
 
-            
 
             if (laneSpawn == 1)
             {
                 //spawn car in start point left lane
                 SpawnedCar = Instantiate(carPrefab, startPointLeft.transform.position, Quaternion.identity);
+                
+                //randomises speed of each car spawned (cs = "car speed")
+                MoveCar cs = SpawnedCar.GetComponent<MoveCar>();
+                cs.speed = Random.Range(3f, 5f);
+
+                //adds spawned cars to the list of cars
+                cars.Add(SpawnedCar);
+
+                //resets attributes
                 despawns = false;
                 laneSpawn = 0;
             }
             else if (laneSpawn == 2)
             {
                 //spawn car in start point right lane
-                SpawnedCar = Instantiate(carPrefab, startPointRight.transform.position, Quaternion.Euler(0,0,180));
+                SpawnedCar = Instantiate(carPrefab, startPointRight.transform.position, Quaternion.Euler(0, 0, 180));
+
+                //randomises speed of each car spawned (cs = "car speed")
+                MoveCar cs = SpawnedCar.GetComponent<MoveCar>();
+                cs.speed = Random.Range(3f, 5f);
+
+                //adds spawned cars to the list of cars
+                cars.Add(SpawnedCar);
+
+                //resets attributes
                 despawns = false;
                 laneSpawn = 0;
             }
 
         }
 
-        //despawns the car that reached the lanes' respective end points
-        if (SpawnedCar.transform.position.y == endPointRight.transform.position.y || SpawnedCar.transform.position.y == endPointLeft.transform.position.y)
+    }
+
+
+    void despawnCar()
+    {
+        for (int i = cars.Count - 1; i >= 0 ; i--)
         {
-            //destroy THIS car object (using list index)
-            Destroy(SpawnedCar);
-            //then set despawns to true
-            despawns = true;
+            float distance = Vector2.Distance(cars[i].transform.position, endPointLeft.position);
+
+            if (distance < 0.5f)
+            {
+                Debug.Log("despawned car succesfully " + i);
+
+                //local variable to get a referance to the car
+                GameObject car = cars[i];
+
+                //remove the car from the list
+                cars.Remove(car);
+
+                //then destroy the car
+                Destroy(car);
+            }
         }
 
 
+
+            ////despawns the car that reached the lanes' respective end points
+            //if (SpawnedCar.transform.position.y == endPointRight.transform.position.y || SpawnedCar.transform.position.y == endPointLeft.transform.position.y)
+            //{
+            //    //destroy THIS car object (using list index)
+            //    Destroy(SpawnedCar);
+            //    //then set despawns to true
+            //    despawns = true;
+            //}
     }
 
     //white car source: https://www.istockphoto.com/vector/white-car-from-top-view-isolated-on-white-background-delivery-automobile-sedan-icon-gm1768708309-545597961
